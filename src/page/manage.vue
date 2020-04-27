@@ -6,11 +6,14 @@
 					<el-menu-item index="manage"><i class="el-icon-menu"></i>监控</el-menu-item>
                     <el-menu-item index="userList"><i class="el-icon-document"></i>管理员管理</el-menu-item>
                     <el-menu-item index="foodList"><i class="el-icon-edit"></i>驾驶员管理</el-menu-item>
-                    <el-menu-item index="addShop"><i class="el-icon-star-on"></i>车辆管理</el-menu-item>
-                    <el-menu-item index="orderList"><i class="el-icon-setting"></i>订单管理</el-menu-item>
+                    <el-submenu index="2">
+                        <template slot="title"><i class="el-icon-setting"></i>订单管理</template>
+                        <el-menu-item index="orderList">订单列表</el-menu-item>
+                        <el-menu-item index="addOrder">添加订单</el-menu-item>
+                    </el-submenu>
                     <el-menu-item index="shopList"><i class="el-icon-warning"></i>异常报警</el-menu-item>
 
-                    <!--                    <el-submenu index="2">-->
+<!--                                        <el-submenu index="2">-->
 <!--						<template slot="title"><i class="el-icon-document"></i>数据管理</template>-->
 <!--						<el-menu-item index="userList">用户列表</el-menu-item>-->
 <!--						<el-menu-item index="shopList">商家列表</el-menu-item>-->

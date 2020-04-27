@@ -21,8 +21,38 @@ export const requestLogin = params => {
 }
 
 export const OrdersList = params => {
-    console.log(params)
     return axios.post('/order/OrdersList', params).then(
+        res => res.data
+    )
+}
+
+export const updateOrder = params => {
+    console.log(params)
+    return axios.post('/order/modify', params).then(
+        res => res.data
+    )
+}
+
+export const deleteOrder = params => {
+    return axios.post('/order/delete', params).then(
+        res => res.data
+    )
+}
+
+export const add = params => {
+    return axios.post('/order/add', params).then(
+        res => res.data
+    )
+}
+
+export const getOnCars = params => {
+    return axios.post('/cars/getOnCars', params).then(
+        res => res.data
+    )
+}
+
+export const assignOrder = params => {
+    return axios.post('/order/assignOrder', params).then(
         res => res.data
     )
 }
