@@ -6,8 +6,14 @@ Vue.use(Router)
 const login = r => require.ensure([], () => r(require('@/page/login')), 'login');
 const manage = r => require.ensure([], () => r(require('@/page/manage')), 'manage');
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
+const ways = r => require.ensure([], () => r(require('@/page/ways')), 'ways');
+const driverList = r => require.ensure([], () => r(require('@/page/driverList')), 'driverList');
 const addOrder = r => require.ensure([], () => r(require('@/page/addOrder')), 'addOrder');
+const addCar = r => require.ensure([], () => r(require('@/page/addCar')), 'addCar');
+const carList = r => require.ensure([], () => r(require('@/page/carList')), 'carList');
+const alertList = r => require.ensure([], () => r(require('@/page/alertList')), 'alertList');
 const addShop = r => require.ensure([], () => r(require('@/page/addShop')), 'addShop');
+const addDriver = r => require.ensure([], () => r(require('@/page/addDriver')), 'addDriver');
 const addGoods = r => require.ensure([], () => r(require('@/page/addGoods')), 'addGoods');
 const userList = r => require.ensure([], () => r(require('@/page/userList')), 'userList');
 const shopList = r => require.ensure([], () => r(require('@/page/shopList')), 'shopList');
@@ -34,8 +40,32 @@ const routes = [
 		children: [{
 			path: '',
 			component: home,
-			meta: [],
+			meta: ['监控'],
 		},{
+            path: '/alertList',
+            component: alertList,
+            meta: ['异常报警', '报警列表'],
+        },{
+            path: '/addCar',
+            component: addCar,
+            meta: ['车辆管理', '添加车辆'],
+        },{
+            path: '/carList',
+            component: carList,
+            meta: ['车辆管理', '车辆列表'],
+        },{
+            path: '/addDriver',
+            component: addDriver,
+            meta: ['驾驶员管理', '添加驾驶员'],
+        },{
+            path: '/driverList',
+            component: driverList,
+            meta: ['驾驶员管理', '驾驶员列表'],
+        },{
+            path: '/ways',
+            component: ways,
+            meta: ['路线'],
+        },{
 			path: '/addShop',
 			component: addShop,
 			meta: ['车辆管理'],
@@ -62,7 +92,7 @@ const routes = [
 		},{
                 path: '/addOrder',
                 component: addOrder,
-                meta: ['添加订单'],
+                meta: ['订单管理', '添加订单'],
         },{
 			path: '/adminList',
 			component: adminList,

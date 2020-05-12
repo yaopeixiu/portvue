@@ -56,3 +56,70 @@ export const assignOrder = params => {
         res => res.data
     )
 }
+
+export const getLocation = params => {
+    return axios.post('/map/location/getLocation', params).then(
+        res => res.data
+    )
+}
+
+export const driverList = params => {
+    return axios.post('/driver/driverList', params).then(
+        res => res.data
+    )
+}
+
+export const addDriver = params => {
+    return axios.post('/driver/addDriver', params).then(
+        res => res.data
+    )
+}
+
+export const updateDriver = params => {
+    return axios.post('/driver/updateDriver', params).then(
+        res => res.data
+    )
+}
+
+export const deleteDriver = params => {
+    return axios.post('/driver/deleteDriver', params).then(
+        res => res.data
+    )
+}
+
+export const carList = params => {
+    return axios.post('/cars/carList', params).then(
+        res => res.data
+    )
+}
+
+export const updateCar = params => {
+    return axios.post('/cars/updateCar', params).then(
+        res => res.data
+    )
+}
+
+export const deleteCar = params => {
+    return axios.post('/cars/deleteCar', params).then(
+        res => res.data
+    )
+}
+
+export const addCar = params => {
+    return axios.post('/cars/addCar', params).then(
+        res => res.data
+    )
+}
+
+export const processed = params => {
+    return axios.post('/alert/processed', params).then(
+        res => res.data
+    )
+}
+
+export const getAlert = params => {
+    return axios.post('/alert/getAlert', params).then(
+        res => res.data
+    )
+}
+

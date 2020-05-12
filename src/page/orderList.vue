@@ -1,6 +1,22 @@
 <template>
     <div class="fillcontain">
         <head-top></head-top>
+        <div class="search" style="width:100%;margin-left:20px">
+            <el-form :inline="true" :model="searchParams" class="demo-form-inline">
+                <el-form-item>
+                    <el-input v-model="searchParams.address" style="width: 160px;" placeholder="请输入地址" clearable></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-input v-model="searchParams.mobile" style="width: 180px;" placeholder="请输入收件人联系电话" clearable></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-input v-model="searchParams.name" style="width: 180px;" placeholder="请输入收件人姓名" clearable></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" icon="el-icon-search" @click="getOrders()">搜索</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
         <div class="table_container">
             <el-table
 			    :data="tableData"
@@ -40,7 +56,7 @@
                     label="车辆ID"
                     prop="carId">
                 </el-table-column>
-                <el-table-column label="操作" width="200">
+                <el-table-column label="操作" width="270">
                     <template slot-scope="scope">
                         <el-button
                             size="small"
@@ -53,6 +69,10 @@
                             size="small"
                             type="success"
                             @click="getOnCars(scope.$index, scope.row)">派 单</el-button>
+                        <el-button
+                            size="small"
+                            type="info"
+                            @click="getRouter(scope.$index, scope.row)">线路</el-button>
                     </template>
                 </el-table-column>
 			</el-table>
@@ -107,11 +127,16 @@
 <script>
     import headTop from '../components/headTop'
     import {getResturantDetail, getUserInfo, getAddressById} from '@/api/getData'
-    import { OrdersList, updateOrder, deleteOrder, getOnCars, assignOrder} from "../api/api";
+    import { OrdersList, updateOrder, deleteCar, getOnCars, assignOrder} from "../api/api"
 
 	export default {
         data(){
             return {
+            	searchParams: {
+					name: null,
+					mobile: null,
+					address: null
+                },
             	editForm: {
             		address: '',
                     name: '',
@@ -173,8 +198,11 @@
                 this.getOrders()
             },
             async getOrders(){
-                const Orders = await OrdersList({page: this.page, limit: this.limit});
-                console.log(Orders);
+                // const Orders = await OrdersList({address:this.address, mobile: this.mobile, name: this.name, page: this.page, limit: this.limit});
+				const subData = {...this.searchParams, page: this.page, limit: this.limit}
+				console.log(subData);
+                const Orders = await OrdersList(subData);
+				console.log(Orders);
                 this.tableData = [];
                 this.count = Orders.data.total;
                 Orders.data.list.forEach((item, index) => {
@@ -191,6 +219,10 @@
                 })
             },
 
+			getRouter(index, row){
+				this.$router.push({path: '/ways', query: { end: row.address}});
+            },
+
 			async getOnCars(index, row){
 				this.dialogTableVisible = true;
 				this.orderId = row.orderId;
@@ -200,7 +232,7 @@
 					const carData = {};
 					carData.carId = item.carId;
 					carData.model = item.model;
-					carData.status = item.status;
+					carData.status = item.status == false ? "空闲" : "忙碌";
 					carData.driverName = item.driverName;
 					this.carData.push(carData);
 				})
@@ -258,9 +290,9 @@
 			async handleDelete(index, row) {
                 this.$confirm('确认提交吗？', '提示', {}).then(() => {
 						// console.log(row.orderId);
-						const subData = {id: row.orderId};
+						const subData = {id: row.carsId};
 						// console.log(subData);
-					deleteOrder(subData).then((res) => {
+					deleteCar(subData).then((res) => {
 						try{
 							if (res.errno == 0) {
 								this.$message({
@@ -313,6 +345,14 @@
 
 <style lang="less">
 	@import '../style/mixin';
+    .bmview {
+        width: 100%;
+        height: 100%;
+    }
+    .map {
+        width: 100%;
+        height: 100%;
+    }
     .table_container{
         padding: 20px;
     }

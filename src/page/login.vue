@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrap">
     <div class="ms-login">
-      <div class="ms-title">姚培秀的港口物流管理系统</div>
+      <div class="ms-title">港口运输管理云平台</div>
       <el-form :model="account" :rules="rules" label-width="0px" class="ms-content">
         <el-form-item prop="username">
           <el-input v-model="account.username" placeholder="username">
@@ -48,10 +48,25 @@
           this.logining = true
           var loginParams = { username: this.account.username, password: this.account.pwd }
           console.log(this.account.username,this.account.pwd)
-          requestLogin(loginParams).then(data => {
+          requestLogin(loginParams).then((data) => {
             this.logining = false
             console.log(data)
-            this.$router.push({ path: '/manage' })
+			  try{
+				  if (data.errno == 0) {
+					  this.$message({
+						  type: 'success',
+						  message: "登陆成功",
+					  });
+					  this.$router.push({ path: '/manage' })
+				  }else{
+					  throw new Error(data.errmsg)
+				  }}catch(err){
+				  this.$message({
+					  type: 'error',
+					  message: "登录失败！"
+				  });
+				  console.log('登录失败！')
+			  }
             // let { code, userid } = data
             // if (code === 200) {
             //   // 登录成功，把用户信息保存在sessionStorage中

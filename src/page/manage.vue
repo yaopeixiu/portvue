@@ -4,14 +4,22 @@
 	  		<el-col :span="4"  style="min-height: 100%; background-color: #324057;">
 				<el-menu :default-active="defaultActive" style="min-height: 100%;" theme="dark" router>
 					<el-menu-item index="manage"><i class="el-icon-menu"></i>监控</el-menu-item>
-                    <el-menu-item index="userList"><i class="el-icon-document"></i>管理员管理</el-menu-item>
-                    <el-menu-item index="foodList"><i class="el-icon-edit"></i>驾驶员管理</el-menu-item>
+                    <el-submenu index="1">
+                        <template slot="title"><i class="el-icon-document"></i>驾驶员管理</template>
+                        <el-menu-item index="driverList">驾驶员列表</el-menu-item>
+                        <el-menu-item index="addDriver">添加驾驶员</el-menu-item>
+                    </el-submenu>
                     <el-submenu index="2">
+                        <template slot="title"><i class="el-icon-star-on"></i>车辆管理</template>
+                        <el-menu-item index="carList">车辆列表</el-menu-item>
+                        <el-menu-item index="addCar">添加车辆</el-menu-item>
+                    </el-submenu>
+                    <el-submenu index="3">
                         <template slot="title"><i class="el-icon-setting"></i>订单管理</template>
                         <el-menu-item index="orderList">订单列表</el-menu-item>
                         <el-menu-item index="addOrder">添加订单</el-menu-item>
                     </el-submenu>
-                    <el-menu-item index="shopList"><i class="el-icon-warning"></i>异常报警</el-menu-item>
+                    <el-menu-item index="alertList"><i class="el-icon-warning"></i>异常报警</el-menu-item>
 
 <!--                                        <el-submenu index="2">-->
 <!--						<template slot="title"><i class="el-icon-document"></i>数据管理</template>-->
